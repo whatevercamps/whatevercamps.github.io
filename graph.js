@@ -2,22 +2,34 @@
 
 const data = {
   nodes: [
-    { id: 1, name: "react", family: 1 },
-    { id: 2, name: "d3", family: 1 },
-    { id: 3, name: "JS", family: 1 },
-    { id: 4, name: "angular", family: 1 },
+    { id: 1, name: "React", family: 1 },
+    { id: 2, name: "D3", family: 1 },
+    { id: 3, name: "Javascript", family: 1 },
+    { id: 4, name: "Angular", family: 1 },
     { id: 5, name: "UX", family: 2 },
-    { id: 6, name: "numpy", family: 3 },
-    { id: 7, name: "python", family: 3 },
-    { id: 8, name: "pandas", family: 3 },
-    { id: 9, name: "design", family: 2 },
-    { id: 10, name: "swift", family: 4 },
+    { id: 6, name: "Numpy", family: 3 },
+    { id: 7, name: "Python", family: 3 },
+    { id: 8, name: "Pandas", family: 3 },
+    { id: 9, name: "Design", family: 2 },
     { id: 11, name: "API-Rest", family: 2 },
     { id: 12, name: "Django", family: 3 },
     { id: 13, name: "Java", family: 4 },
     { id: 14, name: "Back-end", family: 2 },
     { id: 15, name: "Front-end", family: 2 },
-    { id: 16, name: "Bootstrap", family: 1 }
+    { id: 16, name: "Bootstrap", family: 1 },
+    { id: 17, name: "Scala", family: 5},
+    { id: 18, name: "Play", family: 5},
+    { id: 19, name: "SSR", family: 5},
+    { id: 20, name: "Snowplow", family: 6},
+    { id: 29, name: "DevOps", family: 7 },
+    { id: 21, name: "AWS", family: 7},
+    { id: 22, name: "RDS", family: 7},
+    { id: 23, name: "S3", family: 7},
+    { id: 24, name: "EC2", family: 7},
+    { id: 25, name: "Lambda", family: 7},
+    { id: 26, name: "Vue", family: 1 },
+    { id: 27, name: "Nuxt", family: 1 },
+    { id: 28, name: "Typescript", family: 1 },
   ],
   links: [
     { source: 3, target: 1 },
@@ -40,7 +52,21 @@ const data = {
     { source: 7, target: 8 },
     { source: 7, target: 12 },
 
-    { source: 10, target: 5 }
+    { source: 17, target: 18 },
+    { source: 14, target: 17 },
+    { source: 14, target: 29 },
+
+    { source: 29, target: 21 },
+    { source: 21, target: 20 },
+    { source: 21, target: 22 },
+    { source: 21, target: 23 },
+    { source: 21, target: 24 },
+    { source: 21, target: 25 },
+
+    { source: 1, target: 26 },
+    { source: 27, target: 26 },
+    { source: 3, target: 28 },
+    { source: 19, target: 27 },
   ]
 };
 
@@ -91,8 +117,11 @@ const simulation = d3
       .iterations(2)
   );
 
+const isMobile = () => window?.innerWidth <= 720;
+const graphContainerClass = () => isMobile() ? "#graphContainer-mobile" : "#graphContainer";
+
 const svg = d3
-  .select("#graphContainer")
+  .select(graphContainerClass())
   .append("svg")
   .attr("viewBox", [0, 0, width, height]);
 svg.attr("id", "graph");
